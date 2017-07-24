@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 
 import static java.lang.System.exit;
@@ -18,7 +20,7 @@ public class TikTakUI extends JFrame implements Draw {
     private TikTakUIPanel panel;
 
     public TikTakUI(TikTakModel model) throws HeadlessException {
-        super("TikTakModel");
+        super("TicTakModel");
         this.model = model;
         setSize(400, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -30,6 +32,15 @@ public class TikTakUI extends JFrame implements Draw {
     private void init() {
         panel = new TikTakUIPanel();
         add(panel);
+
+        addComponentListener(new ComponentAdapter() {
+                                 @Override
+                                 public void componentResized(ComponentEvent e) {
+                                     super.componentResized(e);
+                                     panel.drawWinnerLine();
+                                 }
+                             }
+        );
     }
 
     @Override
@@ -83,6 +94,12 @@ public class TikTakUI extends JFrame implements Draw {
                int y=(int)bt.getClientProperty("y");
                bt.setText(""+model.getState(x,y)+"");
            }
+            drawWinnerLine();
+
+        }
+
+
+        private void drawWinnerLine() {
             if(model.isWinner()){
                 getGraphics().drawLine(model.getWin0().x,model.getWin0().y,model.getWin1().x*100,model.getWin1().y*100);
             }
