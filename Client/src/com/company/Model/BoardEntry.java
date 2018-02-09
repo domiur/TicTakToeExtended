@@ -1,6 +1,6 @@
 package com.company.Model;
 
-public enum FieldEntry {
+public enum BoardEntry {
     N,
     O,
     X
