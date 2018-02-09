@@ -1,16 +1,12 @@
 package com.company.Model;
 
 public class Field {
-
     private int fieldSize=3;
-    private char field[][];
+    private FieldEntry field[][];
 
-    private static final char X ='X';
-    private static final char O ='O';
-    public  static final char N =' ';
-    private char current= X;
+    private FieldEntry current= FieldEntry.X;
 
-    public char getCurrent(){return current;}
+    public FieldEntry getCurrent(){return current;}
 
     public Field(int fieldSize) {
         this.fieldSize = fieldSize;
@@ -21,16 +17,16 @@ public class Field {
         }
 
     private void makeNewField() {
-        field=new char[fieldSize][];
+        field=new FieldEntry[fieldSize][];
         for(int i=0;i<fieldSize;i++){
-            field[i]=new char[fieldSize];
+            field[i]=new FieldEntry[fieldSize];
             for(int j=0;j<fieldSize;j++) {
-                field[i][j]=N;
+                field[i][j]=FieldEntry.N;
             }
         }
     }
 
-    public char getState(int x, int y){
+    public FieldEntry getState(int x, int y){
         if(x<=0 || x>fieldSize || y<=0 || y>fieldSize){
             throw new IllegalArgumentException();
         }
@@ -38,9 +34,9 @@ public class Field {
     }
 
     public boolean step(int x,int y){
-        if(getState(x,y) != N) return false;
+        if(getState(x,y) != FieldEntry.N) return false;
         field[x-1][y-1]=current;
-        current=(current==X)?O:X;
+        current=(current==FieldEntry.X)?FieldEntry.O:FieldEntry.X;
         return true;
     }
 }
