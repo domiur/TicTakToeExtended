@@ -4,10 +4,6 @@ public class Field {
     private int fieldSize=3;
     private FieldEntry field[][];
 
-    private FieldEntry current= FieldEntry.X;
-
-    public FieldEntry getCurrent(){return current;}
-
     public Field(int fieldSize) {
         this.fieldSize = fieldSize;
         makeNewField();
@@ -33,10 +29,9 @@ public class Field {
         return field[x-1][y-1];
     }
 
-    public boolean step(int x,int y){
+    public boolean setState(int x,int y,FieldEntry e){
         if(getState(x,y) != FieldEntry.N) return false;
-        field[x-1][y-1]=current;
-        current=(current==FieldEntry.X)?FieldEntry.O:FieldEntry.X;
+        field[x-1][y-1]=e;
         return true;
     }
 }
