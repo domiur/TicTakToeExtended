@@ -1,5 +1,6 @@
 package com.company;
 
+import java.security.InvalidParameterException;
 
 public class TikTakModel {
     private int fieldSize=3;
@@ -31,6 +32,9 @@ public class TikTakModel {
         this.fieldSize = fieldSize;
         this.winnerLength = winnerLength;
         this.presentation=p;
+        if(fieldSize<3 || winnerLength<3 || winnerLength>fieldSize){
+            throw new InvalidParameterException("bad input");
+        }
         init();
     }
 

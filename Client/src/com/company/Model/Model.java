@@ -61,14 +61,14 @@ public class Model {
 
             int x=x0;
             int y=y0;
-            char cur=field[x][y];
+            char end=field[x][y];
             win0.set(x,y);
             int n=0;
 
             while(x>=0 && y>=0 && x<fieldSize && y<fieldSize){
-                if (field[x][y] != cur) {
+                if (field[x][y] != end) {
                     if (n >= winnerLength) {
-                        winner = cur;
+                        winner = end;
                         win1.set(x-stepx,y-stepy);
                         return true;
                     } else {
@@ -77,12 +77,12 @@ public class Model {
                     }
                 }
                 if (field[x][y] != N) n++;
-                cur = field[x][y];
+                end = field[x][y];
                 x+=stepx;
                 y+=stepy;
             }
             if (n >= winnerLength) {
-                winner = cur;
+                winner = end;
                 win1.set(x-stepx,y-stepy);
                 return true;
             }
